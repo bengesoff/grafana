@@ -1,7 +1,14 @@
 import uPlot, { AlignedData, Options, PaddingSide } from 'uplot';
 
 import { DataFrame, ensureTimeField, FieldType } from '@grafana/data';
-import { BarAlignment, GraphDrawStyle, GraphTransform, LineInterpolation, StackingMode } from '@grafana/schema';
+import {
+  BarAlignment,
+  GraphDrawStyle,
+  GraphTransform,
+  LineInterpolation,
+  StackingMode,
+  StackingNegativeSeriesHandling
+} from '@grafana/schema';
 
 import { attachDebugger } from '../../utils';
 import { createLogger } from '../../utils/logger';
@@ -107,16 +114,23 @@ export function getStackingGroups(frame: DataFrame) {
       return;
     }
 
-    let { mode: stackingMode, group: stackingGroup } = stacking;
+    let { mode: stackingMode, group: stackingGroup, negative_series_handling: negativeSeriesHandling} = stacking;
 
     // not stacking
     if (stackingMode === StackingMode.None) {
       return;
     }
 
-    // will this be stacked up or down after any transforms applied
-    let transform = custom.transform;
-    let stackDir = getStackDirection(transform, values);
+    // if configured to stack positive and negative series separately, calculate if this series should be in the
+    // positive or negative stack group, otherwise add everything to the positive stack direction
+    let stackDir;
+    if (negativeSeriesHandling === StackingNegativeSeriesHandling.StackSeparately) {
+      // will this be stacked up or down after any transforms applied
+      let transform = custom.transform;
+      stackDir = getStackDirection(transform, values);
+    } else {
+      stackDir = StackDirection.Pos;
+    }
 
     let drawStyle: GraphDrawStyle = custom.drawStyle;
     let drawStyle2: BarAlignment | LineInterpolation | null =
