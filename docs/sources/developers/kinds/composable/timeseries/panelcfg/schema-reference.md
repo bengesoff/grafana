@@ -180,10 +180,11 @@ TODO docs
 
 TODO docs
 
-| Property | Type   | Required | Default | Description                                                     |
-|----------|--------|----------|---------|-----------------------------------------------------------------|
-| `group`  | string | No       |         |                                                                 |
-| `mode`   | string | No       |         | TODO docs<br/>Possible values are: `none`, `normal`, `percent`. |
+| Property                 | Type   | Required | Default | Description                                                            |
+|--------------------------|--------|----------|---------|------------------------------------------------------------------------|
+| `group`                  | string | No       |         |                                                                        |
+| `mode`                   | string | No       |         | TODO docs<br/>Possible values are: `none`, `normal`, `percent`.        |
+| `negativeSeriesHandling` | string | No       |         | TODO docs<br/>Possible values are: `stackSeparately`, `stackTogether`. |
 
 ### Options
 

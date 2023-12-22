@@ -9,6 +9,7 @@ import {
   ScaleOrientation,
   VizTextDisplayOptions,
   VizLegendOptions,
+  StackingNegativeSeriesHandling,
 } from '@grafana/schema';
 import { measureText, PlotTooltipInterpolator } from '@grafana/ui';
 import { formatTime } from '@grafana/ui/src/components/uPlot/config/UPlotAxisBuilder';
@@ -46,7 +47,8 @@ export interface BarsOptions {
   barWidth: number;
   barRadius: number;
   showValue: VisibilityMode;
-  stacking: StackingMode;
+  stacking_mode: StackingMode;
+  negative_series_handling: StackingNegativeSeriesHandling;
   rawValue: (seriesIdx: number, valueIdx: number) => number | null;
   getColor?: (seriesIdx: number, valueIdx: number, value: unknown) => string | null;
   fillOpacity?: number;
@@ -131,8 +133,8 @@ export function getConfig(opts: BarsOptions, theme: GrafanaTheme2) {
   } = opts;
   const isXHorizontal = xOri === ScaleOrientation.Horizontal;
   const hasAutoValueSize = !Boolean(opts.text?.valueSize);
-  const isStacked = opts.stacking !== StackingMode.None;
-  const pctStacked = opts.stacking === StackingMode.Percent;
+  const isStacked = opts.stacking_mode !== StackingMode.None;
+  const pctStacked = opts.stacking_mode === StackingMode.Percent;
 
   let { groupWidth, barWidth, barRadius = 0 } = opts;
 

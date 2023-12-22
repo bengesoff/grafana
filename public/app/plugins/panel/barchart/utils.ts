@@ -69,7 +69,8 @@ export const preparePlotConfigBuilder: UPlotConfigPrepFn<BarChartOptionsEX> = ({
   groupWidth,
   barWidth,
   barRadius = 0,
-  stacking,
+  stacking_mode,
+  negative_series_handling,
   text,
   rawValue,
   getColor,
@@ -107,7 +108,8 @@ export const preparePlotConfigBuilder: UPlotConfigPrepFn<BarChartOptionsEX> = ({
     groupWidth,
     barWidth,
     barRadius,
-    stacking,
+    stacking_mode,
+    negative_series_handling,
     rawValue,
     getColor,
     fillOpacity,
@@ -444,7 +446,7 @@ export function prepareBarChartDisplayValues(
               ...field.config.custom,
               stacking: {
                 group: '_',
-                mode: options.stacking,
+                mode: options.stacking_mode,
               },
             },
           },
@@ -456,7 +458,7 @@ export function prepareBarChartDisplayValues(
           }),
         };
 
-        if (options.stacking === StackingMode.Percent) {
+        if (options.stacking_mode === StackingMode.Percent) {
           copy.config.unit = 'percentunit';
           copy.display = getDisplayProcessor({ field: copy, theme });
         }
@@ -492,7 +494,7 @@ export function prepareBarChartDisplayValues(
   }
 
   // If stacking is percent, we need to correct the fields unit and display
-  if (options.stacking === StackingMode.Percent) {
+  if (options.stacking_mode === StackingMode.Percent) {
     fields.map((field) => {
       const alignedFrameField = frame.fields.find(
         (f) => getFieldDisplayName(f, frame) === getFieldDisplayName(f, frame)

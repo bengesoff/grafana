@@ -260,6 +260,14 @@ export enum StackingMode {
 /**
  * TODO docs
  */
+export enum StackingNegativeSeriesHandling {
+  StackSeparately = 'stackSeparately',
+  StackTogether = 'stackTogether',
+}
+
+/**
+ * TODO docs
+ */
 export enum BarAlignment {
   After = 1,
   Before = -1,
@@ -380,6 +388,7 @@ export interface HideSeriesConfig {
 export interface StackingConfig {
   group?: string;
   mode?: StackingMode;
+  negativeSeriesHandling?: StackingNegativeSeriesHandling;
 }
 
 /**

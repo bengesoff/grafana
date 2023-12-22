@@ -1,22 +1,23 @@
 import {
+  Field,
   FieldColorModeId,
   FieldConfigProperty,
   FieldType,
   identityOverrideProcessor,
   SetFieldConfigOptionsArgs,
-  Field,
 } from '@grafana/data';
 import {
   BarAlignment,
   GraphDrawStyle,
   GraphFieldConfig,
   GraphGradientMode,
+  GraphTransform,
+  GraphTresholdsStyleMode,
   LineInterpolation,
   LineStyle,
-  VisibilityMode,
   StackingMode,
-  GraphTresholdsStyleMode,
-  GraphTransform,
+  StackingNegativeSeriesHandling,
+  VisibilityMode,
 } from '@grafana/schema';
 import { graphFieldOptions, commonOptionsBuilder } from '@grafana/ui';
 
@@ -35,6 +36,7 @@ export const defaultGraphConfig: GraphFieldConfig = {
   stacking: {
     mode: StackingMode.None,
     group: 'A',
+    negativeSeriesHandling: StackingNegativeSeriesHandling.StackSeparately,
   },
   axisGridShow: true,
   axisCenteredZero: false,

@@ -11,12 +11,13 @@ import {
   VizOrientation,
 } from '@grafana/data';
 import {
+  GraphGradientMode,
   LegendDisplayMode,
+  SortOrder,
+  StackingMode,
+  StackingNegativeSeriesHandling,
   TooltipDisplayMode,
   VisibilityMode,
-  GraphGradientMode,
-  StackingMode,
-  SortOrder,
 } from '@grafana/schema';
 
 import { FieldConfig as PanelFieldConfig, Options } from './panelcfg.gen';
@@ -100,7 +101,8 @@ describe('BarChart utils', () => {
       },
       xTickLabelRotation: 0,
       xTickLabelMaxLength: 20,
-      stacking: StackingMode.None,
+      stacking_mode: StackingMode.None,
+      negative_series_handling: StackingNegativeSeriesHandling.StackSeparately,
       tooltip: {
         mode: TooltipDisplayMode.None,
         sort: SortOrder.None,
@@ -145,7 +147,7 @@ describe('BarChart utils', () => {
       expect(
         preparePlotConfigBuilder({
           ...config,
-          stacking: v,
+          stacking_mode: v,
           frame: frame!,
           theme: createTheme(),
           timeZones: [DefaultTimeZone],
@@ -159,7 +161,7 @@ describe('BarChart utils', () => {
 
   describe('prepareGraphableFrames', () => {
     it('will warn when there is no data in the response', () => {
-      const result = prepareBarChartDisplayValues([], createTheme(), { stacking: StackingMode.None } as Options);
+      const result = prepareBarChartDisplayValues([], createTheme(), { stacking_mode: StackingMode.None } as Options);
       const warning = assertIsDefined('warn' in result ? result : null);
 
       expect(warning.warn).toEqual('No data in response');
@@ -172,7 +174,7 @@ describe('BarChart utils', () => {
           { name: 'value', values: [1, 2, 3, 4, 5] },
         ],
       });
-      const result = prepareBarChartDisplayValues([df], createTheme(), { stacking: StackingMode.None } as Options);
+      const result = prepareBarChartDisplayValues([df], createTheme(), { stacking_mode: StackingMode.None } as Options);
       const warning = assertIsDefined('warn' in result ? result : null);
       expect(warning.warn).toEqual('Bar charts requires a string or time field');
       expect(warning).not.toHaveProperty('viz');
@@ -185,7 +187,7 @@ describe('BarChart utils', () => {
           { name: 'value', type: FieldType.boolean, values: [true, true, true, true, true] },
         ],
       });
-      const result = prepareBarChartDisplayValues([df], createTheme(), { stacking: StackingMode.None } as Options);
+      const result = prepareBarChartDisplayValues([df], createTheme(), { stacking_mode: StackingMode.None } as Options);
       const warning = assertIsDefined('warn' in result ? result : null);
       expect(warning.warn).toEqual('No numeric fields found');
       expect(warning).not.toHaveProperty('viz');
@@ -198,7 +200,7 @@ describe('BarChart utils', () => {
           { name: 'value', values: [-10, NaN, 10, -Infinity, +Infinity] },
         ],
       });
-      const result = prepareBarChartDisplayValues([df], createTheme(), { stacking: StackingMode.None } as Options);
+      const result = prepareBarChartDisplayValues([df], createTheme(), { stacking_mode: StackingMode.None } as Options);
       const displayValues = assertIsDefined('viz' in result ? result : null);
 
       const field = displayValues.viz[0].fields[1];
@@ -224,7 +226,7 @@ describe('BarChart utils', () => {
       });
 
       const resultAsc = prepareBarChartDisplayValues([frame], createTheme(), {
-        stacking: StackingMode.Percent,
+        stacking_mode: StackingMode.Percent,
       } as Options);
       const displayLegendValuesAsc = assertIsDefined('viz' in resultAsc ? resultAsc : null).viz[0];
 

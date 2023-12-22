@@ -160,7 +160,7 @@ export const BarChartPanel = ({ data, options, fieldConfig, width, height, timeZ
       seriesIdx = info.aligned.fields.findIndex((f) => disp === getFieldDisplayName(f, info.aligned));
     }
     const tooltipMode =
-      options.fullHighlight && options.stacking !== StackingMode.None ? TooltipDisplayMode.Multi : options.tooltip.mode;
+      options.fullHighlight && options.stacking_mode !== StackingMode.None ? TooltipDisplayMode.Multi : options.tooltip.mode;
 
     const tooltipSort = options.tooltip.mode === TooltipDisplayMode.Multi ? options.tooltip.sort : SortOrder.None;
 
@@ -269,7 +269,8 @@ export const BarChartPanel = ({ data, options, fieldConfig, width, height, timeZ
       barRadius = 0,
       showValue,
       groupWidth,
-      stacking,
+      stacking_mode,
+      negative_series_handling,
       legend,
       tooltip,
       text,
@@ -293,7 +294,8 @@ export const BarChartPanel = ({ data, options, fieldConfig, width, height, timeZ
       xTickLabelRotation,
       xTickLabelMaxLength,
       xTickLabelSpacing,
-      stacking,
+      stacking_mode,
+      negative_series_handling,
       legend,
       tooltip,
       text,

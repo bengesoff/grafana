@@ -36,6 +36,10 @@ export interface Options extends common.OptionsWithLegend, common.OptionsWithToo
    */
   groupWidth: number;
   /**
+   * Controls whether negative series are stacked in a separate group to positive ones
+   */
+  negative_series_handling: common.StackingNegativeSeriesHandling;
+  /**
    * Controls the orientation of the bar chart, either vertical or horizontal.
    */
   orientation: common.VizOrientation;
@@ -46,7 +50,7 @@ export interface Options extends common.OptionsWithLegend, common.OptionsWithToo
   /**
    * Controls whether bars are stacked or not, either normally or in percent mode.
    */
-  stacking: common.StackingMode;
+  stacking_mode: common.StackingMode;
   /**
    * Manually select which field from the dataset to represent the x field.
    */
@@ -71,9 +75,10 @@ export const defaultOptions: Partial<Options> = {
   barWidth: 0.97,
   fullHighlight: false,
   groupWidth: 0.7,
+  negative_series_handling: common.StackingNegativeSeriesHandling.StackSeparately,
   orientation: common.VizOrientation.Auto,
   showValue: common.VisibilityMode.Auto,
-  stacking: common.StackingMode.None,
+  stacking_mode: common.StackingMode.None,
   xTickLabelRotation: 0,
   xTickLabelSpacing: 0,
 };

@@ -59,13 +59,13 @@ export class BarChartSuggestionsSupplier {
       list.append({
         name: SuggestionName.BarChartStacked,
         options: {
-          stacking: StackingMode.Normal,
+          stacking_mode: StackingMode.Normal,
         },
       });
       list.append({
         name: SuggestionName.BarChartStackedPercent,
         options: {
-          stacking: StackingMode.Percent,
+          stacking_mode: StackingMode.Percent,
         },
       });
     }
@@ -82,7 +82,7 @@ export class BarChartSuggestionsSupplier {
       list.append({
         name: SuggestionName.BarChartHorizontalStacked,
         options: {
-          stacking: StackingMode.Normal,
+          stacking_mode: StackingMode.Normal,
           orientation: VizOrientation.Horizontal,
         },
       });
@@ -91,7 +91,7 @@ export class BarChartSuggestionsSupplier {
         name: SuggestionName.BarChartHorizontalStackedPercent,
         options: {
           orientation: VizOrientation.Horizontal,
-          stacking: StackingMode.Percent,
+          stacking_mode: StackingMode.Percent,
         },
       });
     }

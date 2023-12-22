@@ -28,6 +28,9 @@ GraphGradientMode:  "none" | "opacity" | "hue" | "scheme"                   @cue
 StackingMode:       "none" | "normal" | "percent"                           @cuetsy(kind="enum")
 
 // TODO docs
+StackingNegativeSeriesHandling: "stackSeparately" | "stackTogether"         @cuetsy(kind="enum")
+
+// TODO docs
 BarAlignment:       -1 | 0 | 1                                              @cuetsy(kind="enum",memberNames="Before|Center|After")
 
 // TODO docs
@@ -109,6 +112,7 @@ HideSeriesConfig: {
 StackingConfig: {
 	mode?:  StackingMode
 	group?: string
+	negativeSeriesHandling?: StackingNegativeSeriesHandling
 } @cuetsy(kind="interface")
 
 // TODO docs

@@ -102,23 +102,24 @@ TODO docs
 
 It extends [OptionsWithLegend](#optionswithlegend) and [OptionsWithTooltip](#optionswithtooltip) and [OptionsWithTextFormatting](#optionswithtextformatting).
 
-| Property              | Type                                            | Required | Default | Description                                                                                                      |
-|-----------------------|-------------------------------------------------|----------|---------|------------------------------------------------------------------------------------------------------------------|
-| `barWidth`            | number                                          | **Yes**  | `0.97`  | Controls the width of bars. 1 = Max width, 0 = Min width.<br/>Constraint: `>=0 & <=1`.                           |
-| `fullHighlight`       | boolean                                         | **Yes**  | `false` | Enables mode which highlights the entire bar area and shows tooltip when cursor<br/>hovers over highlighted area |
-| `groupWidth`          | number                                          | **Yes**  | `0.7`   | Controls the width of groups. 1 = max with, 0 = min width.<br/>Constraint: `>=0 & <=1`.                          |
-| `legend`              | [VizLegendOptions](#vizlegendoptions)           | **Yes**  |         | *(Inherited from [OptionsWithLegend](#optionswithlegend))*<br/>TODO docs                                         |
-| `orientation`         | string                                          | **Yes**  |         | Controls the orientation of the bar chart, either vertical or horizontal.                                        |
-| `showValue`           | string                                          | **Yes**  |         | This controls whether values are shown on top or to the left of bars.                                            |
-| `stacking`            | string                                          | **Yes**  |         | Controls whether bars are stacked or not, either normally or in percent mode.                                    |
-| `tooltip`             | [VizTooltipOptions](#viztooltipoptions)         | **Yes**  |         | *(Inherited from [OptionsWithTooltip](#optionswithtooltip))*<br/>TODO docs                                       |
-| `xTickLabelMaxLength` | integer                                         | **Yes**  |         | Sets the max length that a label can have before it is truncated.<br/>Constraint: `>=0 & <=2147483647`.          |
-| `xTickLabelRotation`  | integer                                         | **Yes**  | `0`     | Controls the rotation of the x axis labels.<br/>Constraint: `>=-90 & <=90`.                                      |
-| `barRadius`           | number                                          | No       | `0`     | Controls the radius of each bar.<br/>Constraint: `>=0 & <=0.5`.                                                  |
-| `colorByField`        | string                                          | No       |         | Use the color value for a sibling field to color each bar value.                                                 |
-| `text`                | [VizTextDisplayOptions](#viztextdisplayoptions) | No       |         | *(Inherited from [OptionsWithTextFormatting](#optionswithtextformatting))*<br/>TODO docs                         |
-| `xField`              | string                                          | No       |         | Manually select which field from the dataset to represent the x field.                                           |
-| `xTickLabelSpacing`   | int32                                           | No       | `0`     | Controls the spacing between x axis labels.<br/>negative values indicate backwards skipping behavior             |
+| Property                   | Type                                            | Required | Default | Description                                                                                                      |
+|----------------------------|-------------------------------------------------|----------|---------|------------------------------------------------------------------------------------------------------------------|
+| `barWidth`                 | number                                          | **Yes**  | `0.97`  | Controls the width of bars. 1 = Max width, 0 = Min width.<br/>Constraint: `>=0 & <=1`.                           |
+| `fullHighlight`            | boolean                                         | **Yes**  | `false` | Enables mode which highlights the entire bar area and shows tooltip when cursor<br/>hovers over highlighted area |
+| `groupWidth`               | number                                          | **Yes**  | `0.7`   | Controls the width of groups. 1 = max with, 0 = min width.<br/>Constraint: `>=0 & <=1`.                          |
+| `legend`                   | [VizLegendOptions](#vizlegendoptions)           | **Yes**  |         | *(Inherited from [OptionsWithLegend](#optionswithlegend))*<br/>TODO docs                                         |
+| `negative_series_handling` | string                                          | **Yes**  |         | Controls whether negative series are stacked in a separate group to positive ones                                |
+| `orientation`              | string                                          | **Yes**  |         | Controls the orientation of the bar chart, either vertical or horizontal.                                        |
+| `showValue`                | string                                          | **Yes**  |         | This controls whether values are shown on top or to the left of bars.                                            |
+| `stacking_mode`            | string                                          | **Yes**  |         | Controls whether bars are stacked or not, either normally or in percent mode.                                    |
+| `tooltip`                  | [VizTooltipOptions](#viztooltipoptions)         | **Yes**  |         | *(Inherited from [OptionsWithTooltip](#optionswithtooltip))*<br/>TODO docs                                       |
+| `xTickLabelMaxLength`      | integer                                         | **Yes**  |         | Sets the max length that a label can have before it is truncated.<br/>Constraint: `>=0 & <=2147483647`.          |
+| `xTickLabelRotation`       | integer                                         | **Yes**  | `0`     | Controls the rotation of the x axis labels.<br/>Constraint: `>=-90 & <=90`.                                      |
+| `barRadius`                | number                                          | No       | `0`     | Controls the radius of each bar.<br/>Constraint: `>=0 & <=0.5`.                                                  |
+| `colorByField`             | string                                          | No       |         | Use the color value for a sibling field to color each bar value.                                                 |
+| `text`                     | [VizTextDisplayOptions](#viztextdisplayoptions) | No       |         | *(Inherited from [OptionsWithTextFormatting](#optionswithtextformatting))*<br/>TODO docs                         |
+| `xField`                   | string                                          | No       |         | Manually select which field from the dataset to represent the x field.                                           |
+| `xTickLabelSpacing`        | int32                                           | No       | `0`     | Controls the spacing between x axis labels.<br/>negative values indicate backwards skipping behavior             |
 
 ### OptionsWithLegend
 

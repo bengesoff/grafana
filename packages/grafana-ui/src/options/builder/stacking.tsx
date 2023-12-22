@@ -7,7 +7,7 @@ import {
   identityOverrideProcessor,
   SelectableValue,
 } from '@grafana/data';
-import { GraphFieldConfig, StackingConfig, StackingMode } from '@grafana/schema';
+import { GraphFieldConfig, StackingConfig, StackingMode, StackingNegativeSeriesHandling } from '@grafana/schema';
 
 import { RadioButtonGroup } from '../../components/Forms/RadioButtonGroup/RadioButtonGroup';
 import { IconButton } from '../../components/IconButton/IconButton';
@@ -20,34 +20,52 @@ export const StackingEditor = ({
   context,
   onChange,
   item,
-}: StandardEditorProps<StackingConfig, { options: Array<SelectableValue<StackingMode>> }>) => {
+}: StandardEditorProps<StackingConfig, {
+  mode_options: Array<SelectableValue<StackingMode>>
+  negative_series_handling_options: Array<SelectableValue<StackingNegativeSeriesHandling>>
+}>) => {
   return (
-    <HorizontalGroup>
-      <RadioButtonGroup
-        value={value?.mode || StackingMode.None}
-        options={item.settings?.options ?? []}
-        onChange={(v) => {
-          onChange({
-            ...value,
-            mode: v,
-          });
-        }}
-      />
-      {context.isOverride && value?.mode && value?.mode !== StackingMode.None && (
-        <Input
-          type="text"
-          placeholder="Group"
-          suffix={<IconButton name="question-circle" tooltip="Name of the stacking group" tooltipPlacement="top" />}
-          defaultValue={value?.group}
+    // TODO: fix layout
+    <>
+      <HorizontalGroup>
+        <RadioButtonGroup
+          value={value?.mode || StackingMode.None}
+          options={item.settings?.mode_options ?? []}
           onChange={(v) => {
             onChange({
               ...value,
-              group: v.currentTarget.value.trim(),
+              mode: v,
+            });
+          }}
+        />
+        {context.isOverride && value?.mode && value?.mode !== StackingMode.None && (
+          <Input
+            type="text"
+            placeholder="Group"
+            suffix={<IconButton name="question-circle" tooltip="Name of the stacking group" tooltipPlacement="top" />}
+            defaultValue={value?.group}
+            onChange={(v) => {
+              onChange({
+                ...value,
+                group: v.currentTarget.value.trim(),
+              });
+            }}
+          />
+        )}
+      </HorizontalGroup>
+      {value?.mode !== StackingMode.None && (
+        <RadioButtonGroup
+          value={value?.negativeSeriesHandling || StackingNegativeSeriesHandling.StackSeparately}
+          options={item.settings?.negative_series_handling_options ?? []}
+          onChange={(v) => {
+            onChange({
+              ...value,
+              negativeSeriesHandling: v,
             });
           }}
         />
       )}
-    </HorizontalGroup>
+    </>
   );
 };
 
@@ -65,7 +83,8 @@ export function addStackingConfig(
     editor: StackingEditor,
     override: StackingEditor,
     settings: {
-      options: graphFieldOptions.stacking,
+      mode_options: graphFieldOptions.stacking_mode,
+      negative_series_handling_options: graphFieldOptions.stacking_negative_series_handling,
     },
     process: identityOverrideProcessor,
     shouldApply: (f) => f.type === FieldType.number,

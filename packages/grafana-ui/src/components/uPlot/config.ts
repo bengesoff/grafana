@@ -6,8 +6,9 @@ import {
   GraphGradientMode,
   GraphTresholdsStyleMode,
   LineInterpolation,
-  VisibilityMode,
   StackingMode,
+  StackingNegativeSeriesHandling,
+  VisibilityMode,
 } from '@grafana/schema';
 
 /**
@@ -20,7 +21,8 @@ export const graphFieldOptions: {
   showPoints: Array<SelectableValue<VisibilityMode>>;
   axisPlacement: Array<SelectableValue<AxisPlacement>>;
   fillGradient: Array<SelectableValue<GraphGradientMode>>;
-  stacking: Array<SelectableValue<StackingMode>>;
+  stacking_mode: Array<SelectableValue<StackingMode>>;
+  stacking_negative_series_handling: Array<SelectableValue<StackingNegativeSeriesHandling>>;
   thresholdsDisplayModes: Array<SelectableValue<GraphTresholdsStyleMode>>;
 } = {
   drawStyle: [
@@ -66,10 +68,15 @@ export const graphFieldOptions: {
     },
   ],
 
-  stacking: [
+  stacking_mode: [
     { label: 'Off', value: StackingMode.None },
     { label: 'Normal', value: StackingMode.Normal },
     { label: '100%', value: StackingMode.Percent },
+  ],
+
+  stacking_negative_series_handling: [
+    { label: 'Stack All Series Together', value: StackingNegativeSeriesHandling.StackTogether },
+    { label: 'Stack Negative Series Separately', value: StackingNegativeSeriesHandling.StackSeparately },
   ],
 
   thresholdsDisplayModes: [

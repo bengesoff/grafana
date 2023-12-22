@@ -47,7 +47,9 @@ composableKinds: PanelCfg: {
 					// negative values indicate backwards skipping behavior
 					xTickLabelSpacing?: int32 | *0
 					// Controls whether bars are stacked or not, either normally or in percent mode.
-					stacking: common.StackingMode & (*"none" | _)
+					stacking_mode: common.StackingMode & (*"none" | _)
+					// Controls whether negative series are stacked in a separate group to positive ones
+					negative_series_handling: common.StackingNegativeSeriesHandling & (*"stackSeparately" | _)
 					// This controls whether values are shown on top or to the left of bars.
 					showValue: common.VisibilityMode & (*"auto" | _)
 					// Controls the width of bars. 1 = Max width, 0 = Min width.

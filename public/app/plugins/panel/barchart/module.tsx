@@ -178,12 +178,23 @@ export const plugin = new PanelPlugin<Options, FieldConfig>(BarChartPanel)
         defaultValue: defaultOptions.showValue,
       })
       .addRadio({
-        path: 'stacking',
+        path: 'stacking_mode',
         name: 'Stacking',
         settings: {
-          options: graphFieldOptions.stacking,
+          options: graphFieldOptions.stacking_mode,
         },
-        defaultValue: defaultOptions.stacking,
+        defaultValue: defaultOptions.stacking_mode,
+      })
+      .addRadio({
+        path: 'negative_series_handling',
+        name: 'Stacking Negative Series Handling',
+        settings: {
+          options: graphFieldOptions.stacking_negative_series_handling,
+        },
+        defaultValue: defaultOptions.negative_series_handling,
+        showIf: (c) => {
+          return c.stacking_mode !== StackingMode.None;
+        },
       })
       .addSliderInput({
         path: 'groupWidth',
@@ -195,7 +206,7 @@ export const plugin = new PanelPlugin<Options, FieldConfig>(BarChartPanel)
           step: 0.01,
         },
         showIf: (c, data) => {
-          if (c.stacking && c.stacking !== StackingMode.None) {
+          if (c.stacking_mode && c.stacking_mode !== StackingMode.None) {
             return false;
           }
           return countNumberFields(data) !== 1;
@@ -233,7 +244,7 @@ export const plugin = new PanelPlugin<Options, FieldConfig>(BarChartPanel)
       description: 'Use the color value for a sibling field to color each bar value.',
     });
 
-    if (!context.options?.fullHighlight || context.options?.stacking === StackingMode.None) {
+    if (!context.options?.fullHighlight || context.options?.stacking_mode === StackingMode.None) {
       commonOptionsBuilder.addTooltipOptions(builder);
     }
 
